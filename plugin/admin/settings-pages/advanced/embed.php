@@ -13,26 +13,47 @@ if ( ! is_admin() ) {
 }
 
 /**
- * Registers actions into WrodPress
+ * Registers actions into WordPress
  */
 function register() {
 	add_action( 'admin_init', '\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\add' );
 }
 
 /**
- * Adds settings field to advance settings page
+ * Adds settings field to advanced settings page
  */
 function add() {
-	add_settings_section( 'sgdd_file', esc_html__( 'File embed settings', 'skaut-google-drive-documents' ), '\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\display', 'sgdd_advanced' );
-	add_settings_section( 'sgdd_folder', esc_html__( 'Folder embed settings', 'skaut-google-drive-documents' ), '\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\display', 'sgdd_advanced' );
+	add_settings_section(
+		'sgdd_file',
+		esc_html__( 'File embed settings', 'skaut-google-drive-documents' ),
+		'\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\display',
+		'sgdd_advanced'
+	);
+
 	\Sgdd\Admin\Options\Options::$embed_width->add_field();
 	\Sgdd\Admin\Options\Options::$embed_height->add_field();
+
+	add_settings_section(
+		'sgdd_folder',
+		esc_html__( 'Folder embed settings', 'skaut-google-drive-documents' ),
+		'\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\display',
+		'sgdd_advanced'
+	);
+
 	\Sgdd\Admin\Options\Options::$folder_type->add_field();
 	\Sgdd\Admin\Options\Options::$order_by->add_field();
 	\Sgdd\Admin\Options\Options::$list_width->add_field();
 	\Sgdd\Admin\Options\Options::$grid_cols->add_field();
+
+	add_settings_section(
+		'sgdd_other',
+		esc_html__( 'Other settings', 'skaut-google-drive-documents' ),
+		'\\Sgdd\\Admin\\SettingsPages\\Advanced\\Embed\\display',
+		'sgdd_advanced'
+	);
+
+	\Sgdd\Admin\Options\Options::$hide_gdd->add_field();
 }
 
 function display() {
-	settings_errors();
 }

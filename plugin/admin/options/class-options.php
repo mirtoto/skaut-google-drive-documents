@@ -11,11 +11,17 @@ require_once __DIR__ . '/option-types/class-stringfield.php';
 require_once __DIR__ . '/option-types/class-pathfield.php';
 require_once __DIR__ . '/option-types/class-integerfield.php';
 require_once __DIR__ . '/option-types/class-selectfield.php';
+require_once __DIR__ . '/option-types/class-checkboxfield.php';
 
 /**
  * A class that contain all configuration settings of plugin.
  */
 class Options {
+	/**
+	 * Prefix added to option id during initialization.
+	 */
+	public const prefix = 'sgdd_';
+
 	/**
 	 * Show authorized domain for registering Google app.
 	 *
@@ -101,6 +107,13 @@ class Options {
 	public static $grid_cols;
 
 	/**
+	 * Hide Google Drive Documents Menu.
+	 * 
+	 * @var \Sgdd\Admin\Options\OptionTypes\CheckboxField $hide_gdd
+	 */
+	public static $hide_gdd;
+
+	/**
 	 * Class initializer function
 	 */
 	public static function init() {
@@ -121,6 +134,10 @@ class Options {
 		self::$order_by = new \Sgdd\Admin\Options\OptionTypes\SelectField( 'order_by', __( 'Order files by', 'skaut-google-drive-documents' ), 'advanced', 'folder', 'name_asc' );
 
 		self::$list_width = new \Sgdd\Admin\Options\OptionTypes\StringField( 'list_width', __( 'List width', 'skaut-google-drive-documents' ), 'advanced', 'folder', '100%' );
-		self::$grid_cols  = new \Sgdd\Admin\Options\OptionTypes\IntegerField( 'grid_cols', __( 'Grid columns', 'skaut-google-drive-documents' ), 'advanced', 'folder', '3' );
+		self::$grid_cols = new \Sgdd\Admin\Options\OptionTypes\IntegerField( 'grid_cols', __( 'Grid columns', 'skaut-google-drive-documents' ), 'advanced', 'folder', '3' );
+
+		self::$hide_gdd = new \Sgdd\Admin\Options\OptionTypes\CheckboxField( 'hide_gdd', __( 'Google Drive Documents Menu', 'skaut-google-drive-documents' ), 'advanced', 'other', 0,
+			__( 'Hide (Not recommended)' ),
+			__( 'This will hide the Google Drive Documents Menu (on the left side) and everything it contains. You can re-enable it through an option that will be added in Settings → General.' ) );
 	}
 }

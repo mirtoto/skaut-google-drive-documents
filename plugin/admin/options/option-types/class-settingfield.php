@@ -49,18 +49,22 @@ abstract class SettingField {
 	/**
 	 * SettingField class constructor.
 	 *
-	 * @param $id An unique name of the option used as key to reference it. Prefix "sgdd_" will be added.
-	 * @param @title Name of the option displayed to user.
-	 * @param $page Setting page in which the option will be displayed. Prefix "sgdd_" will be added.
-	 * @param $section Section within page in which the option will be displayed. Prefix "sgdd_" will be added.
-	 * @param $default_value Default valur of option if user do not specify one.
+	 * @param $id An unique name of the option used as key to reference it. Prefix Options::prefix will be added.
+	 * @param $title Name of the option displayed to user.
+	 * @param $page Setting page in which the option will be displayed. Prefix Options::prefix will be added.
+	 * @param $section Section within page in which the option will be displayed. Prefix Options::prefix will be added.
+	 * @param $default_value Default value of option if user do not specify one.
+	 * @param $label Label for checkbox.
+	 * @param $description Optional description.
 	 */
-	public function __construct( $id, $title, $page, $section, $default_value ) {
-		$this->id            = 'sgdd_' . $id;
+	public function __construct( $id, $title, $page, $section, $default_value, $label = '', $desciption = '' ) {
+		$this->id            = \Sgdd\Admin\Options\Options::prefix . $id;
 		$this->title         = $title;
-		$this->page          = 'sgdd_' . $page;
-		$this->section       = 'sgdd_' . $section;
+		$this->page          = \Sgdd\Admin\Options\Options::prefix . $page;
+		$this->section       = \Sgdd\Admin\Options\Options::prefix . $section;
 		$this->default_value = $default_value;
+		$this->label		 = $label;
+		$this->description	 = $desciption;
 	}
 
 	/**

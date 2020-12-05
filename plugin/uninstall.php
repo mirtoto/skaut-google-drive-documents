@@ -12,10 +12,11 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die( 'None of your business' );
 }
 
-delete_option( 'sgdd_redirect_uri' );
-delete_option( 'sgdd_client_id' );
-delete_option( 'sgdd_client_secret' );
-
-delete_option( 'sgdd_access_token' );
-
-delete_option( 'sgdd_root_path' );
+$settingOptions = array( 'redirect_uri', 'client_id', 'client_secret',
+	'access_token', 'root_path', 'embed_width', 'embed_height', 'folder_type',
+	'order_by', 'list_width', 'grid_cols', 'hide_gdd');	
+ 
+// Clear up our settings
+foreach ( $settingOptions as $settingName ) {
+    delete_option( \Sgdd\Admin\Options\Options::prefix . $settingName );
+}
