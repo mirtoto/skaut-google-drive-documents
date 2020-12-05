@@ -46,6 +46,20 @@ function register_style() {
  * Adds menu to admin section.
  */
 function add_menu() {
+	// Hide "Google Drive Documents" menu from main admin menu
+	if ( get_option( \Sgdd\Admin\Options\Options::prefix . 'hide_gdd', 0 ) == 1 ) {
+		register_setting( 'general', \Sgdd\Admin\Options\Options::prefix . 'hide_gdd' );
+		add_settings_field(
+			\Sgdd\Admin\Options\Options::prefix . 'hide_gdd',
+			__( 'Google Drive Documents Menu', 'skaut-google-drive-documents' ),
+			function() {
+				\Sgdd\Admin\Options\Options::$hide_gdd->display();
+			},
+			'general'
+		);
+		return;
+	}
+
 	add_menu_page(
 		__( 'Google Drive Documents Settings', 'skaut-google-drive-documents' ),
 		__( 'Google Drive Documents', 'skaut-google-drive-documents' ),
